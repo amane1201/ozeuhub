@@ -12,6 +12,7 @@ body {
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 #intro-video {
@@ -22,14 +23,22 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+#page-content {
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 #logo {
   margin: 20px;
   width: 200px;
   max-width: 40vw;
-  position: relative;
-  z-index: 1100;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1s ease;
 }
 
 #categories {
@@ -40,8 +49,6 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  position: relative;
-  z-index: 1100;
 }
 
 #categories span {
@@ -50,6 +57,9 @@ body {
   font-size: 16px;
   position: relative;
   padding-bottom: 5px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
 }
 
 #categories span.active::after {
@@ -64,22 +74,20 @@ body {
 }
 
 .gallery {
-  margin-top: 10px;
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  padding: 20px;
-  position: relative;
-  z-index: 1100;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  padding: 15px;
 }
 
 .gallery img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 150px; 
+  object-fit: cover;
+  display: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.3s;
 }
 
 .gallery img:hover {
@@ -109,8 +117,9 @@ footer {
   text-align: center;
   padding: 20px;
   font-size: 16px;
-  position: relative;
-  z-index: 1100;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
 }
 
 footer a {
@@ -123,18 +132,16 @@ footer a:hover {
   color: orange;
 }
 
+@media (max-width: 900px) and (min-width: 601px) {
+  .gallery { gap: 10px; padding: 12px; }
+  .gallery img { height: 140px; }
+}
+
 @media (max-width: 600px) {
-  #categories span {
-    font-size: 14px;
-  }
-  .gallery {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 8px;
-    padding: 10px;
-  }
-  #logo {
-    width: 120px;
-  }
+  #categories span { font-size: 14px; }
+  .gallery { gap: 8px; padding: 10px; }
+  .gallery img { height: 120px; }
+  #logo { width: 120px; }
 }
 </style>
 </head>
@@ -144,47 +151,68 @@ footer a:hover {
   <source src="ozeuhub.mp4" type="video/mp4">
 </video>
 
-<img id="logo" src="ozeuhub.jpeg" alt="ロゴ">
+<div id="page-content">
+  <img id="logo" src="ozeuhub.jpeg" alt="ロゴ">
 
-<div id="categories">
-  <span data-tag="all" class="active">すべて</span>
-  <span data-tag="ozeu">おぜう</span>
-  <span data-tag="zetopura">ぜっとぷらす</span>
-  <span data-tag="raito">らいとせーばー</span>
+  <div id="categories">
+    <span data-tag="all" class="active">すべて</span>
+    <span data-tag="ozeu">おぜう</span>
+    <span data-tag="zetopura">ぜっとぷらす</span>
+    <span data-tag="raito">らいとせーばー</span>
+  </div>
+
+  <main class="gallery">
+    <img src="https://i.imgur.com/vajZjDd.png" alt="ozeu" data-tags="ozeu">
+    <img src="https://i.imgur.com/yXWbT1U.png" alt="ozeu" data-tags="ozeu">
+    <img src="https://i.imgur.com/j6TT93m.jpeg" alt="ozeu" data-tags="ozeu">
+    <img src="https://i.imgur.com/8mLHK8Q.jpeg" alt="ozeu" data-tags="ozeu">
+    <img src="https://i.imgur.com/KWV6oFr.jpeg" alt="ozeu" data-tags="ozeu">
+    <img src="https://i.imgur.com/oYoXoDH.png" alt="zetopura" data-tags="zetopura">
+    <img src="https://i.imgur.com/FBn6YyE.png" alt="zetopura" data-tags="zetopura">
+    <img src="https://i.imgur.com/s7jc1kH.png" alt="zetopura" data-tags="zetopura">
+    <img src="https://i.imgur.com/YyUmHYL.png" alt="raito" data-tags="raito">
+    <img src="https://i.imgur.com/kDk7gMs.png" alt="raito" data-tags="raito">
+    <img src="https://i.imgur.com/q855g5S.png" alt="raito" data-tags="raito">
+    <img src="https://i.imgur.com/gdU6lmC.png" alt="raito" data-tags="raito">
+  </main>
+
+  <footer>
+    <a href="https://discord.gg/ozeu" target="_blank">作成Discordサーバー</a>
+  </footer>
 </div>
-
-<main class="gallery">
-  <img src="https://i.imgur.com/vajZjDd.png" alt="ozeu" data-tags="ozeu">
-  <img src="https://i.imgur.com/yXWbT1U.png" alt="ozeu" data-tags="ozeu">
-  <img src="https://i.imgur.com/j6TT93m.jpeg" alt="ozeu" data-tags="ozeu">
-  <img src="https://i.imgur.com/8mLHK8Q.jpeg" alt="ozeu" data-tags="ozeu">
-  <img src="https://i.imgur.com/KWV6oFr.jpeg" alt="ozeu" data-tags="ozeu">
-  <img src="https://i.imgur.com/oYoXoDH.png" alt="zetopura" data-tags="zetopura">
-  <img src="https://i.imgur.com/FBn6YyE.png" alt="zetopura" data-tags="zetopura">
-  <img src="https://i.imgur.com/s7jc1kH.png" alt="zetopura" data-tags="zetopura">
-  <img src="https://i.imgur.com/YyUmHYL.png" alt="raito" data-tags="raito">
-  <img src="https://i.imgur.com/kDk7gMs.png" alt="raito" data-tags="raito">
-  <img src="https://i.imgur.com/q855g5S.png" alt="raito" data-tags="raito">
-  <img src="https://i.imgur.com/gdU6lmC.png" alt="raito" data-tags="raito">
-</main>
 
 <div id="lightbox">
   <img src="" alt="拡大写真">
 </div>
 
-<footer>
-  <a href="https://discord.gg/ozeu" target="_blank">作成Discordサーバー</a>
-</footer>
-
 <script>
 const video = document.getElementById('intro-video');
-video.addEventListener('ended', () => {
-  video.style.display = 'none';
-});
-
+const pageContent = document.getElementById('page-content');
 const galleryImages = document.querySelectorAll('.gallery img');
+const categories = document.querySelectorAll('#categories span');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
+
+video.addEventListener('ended', () => {
+  video.style.opacity = '0';
+  setTimeout(() => {
+    video.style.display = 'none';
+    pageContent.style.opacity = '1';
+    document.getElementById('logo').style.opacity = '1';
+    document.getElementById('logo').style.transform = 'scale(1)';
+
+    categories.forEach((span, i) => {
+      setTimeout(() => {
+        span.style.opacity = '1';
+        span.style.transform = 'translateY(0)';
+      }, i * 150);
+    });
+
+    galleryImages.forEach(img => { img.style.display = 'block'; });
+    document.querySelector('footer').style.opacity = '1';
+    document.querySelector('footer').style.transform = 'translateY(0)';
+  }, 1000);
+});
 
 galleryImages.forEach(img => {
   img.addEventListener('click', () => {
@@ -192,12 +220,8 @@ galleryImages.forEach(img => {
     lightbox.style.display = 'flex';
   });
 });
+lightbox.addEventListener('click', () => { lightbox.style.display = 'none'; });
 
-lightbox.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
-
-const categories = document.querySelectorAll('#categories span');
 categories.forEach(span => {
   span.addEventListener('click', () => {
     categories.forEach(s => s.classList.remove('active'));
@@ -206,11 +230,7 @@ categories.forEach(span => {
     const tag = span.getAttribute('data-tag');
     galleryImages.forEach(img => {
       const imgTags = img.getAttribute('data-tags').split(',');
-      if(tag === 'all' || imgTags.includes(tag)) {
-        img.style.display = 'block';
-      } else {
-        img.style.display = 'none';
-      }
+      img.style.display = (tag === 'all' || imgTags.includes(tag)) ? 'block' : 'none';
     });
   });
 });
