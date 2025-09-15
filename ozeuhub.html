@@ -96,6 +96,22 @@ body {
 #lightbox:active {
   display:none;
 }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: orange;
+}
 </style>
 </head>
 <body>
@@ -127,7 +143,9 @@ body {
 <div id="lightbox">
   <img src="" alt="拡大写真">
 </div>
-
+<footer>
+  <a href="https://discord.gg/ozeu" target="_blank">作成Discordサーバー</a>
+</footer>
 <script>
 const galleryImages = document.querySelectorAll('.gallery img');
 const lightbox = document.getElementById('lightbox');
@@ -165,4 +183,5 @@ categories.forEach(span => {
 
 </body>
 </html>
+
 
